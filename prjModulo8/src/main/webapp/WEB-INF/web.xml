@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>prjModulo8</display-name>
+  
+  <filter>
+  	<filter-name>CharsetFilter</filter-name><!-- pode ser qualquer nome -->
+  	<filter-class>ifgoiano.edu.br.filter.CharsetFilter</filter-class>
+  	<init-param>
+  		<param-name>requestEncoding</param-name>
+  		<param-value>UTF-8</param-value>
+  	</init-param>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>CharsetFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <!-- Conexao DataBase -->
+  	<!-- Listening -->
+  	<listener>
+	    <listener-class>org.h2.server.web.DbStarter</listener-class>
+	</listener>
+	<!-- Console Config -->
+	<servlet>
+	    <servlet-name>H2Console</servlet-name>
+	    <servlet-class>org.h2.server.web.WebServlet</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>H2Console</servlet-name>
+	    <url-pattern>/console/*</url-pattern>
+	</servlet-mapping>
+  <!-- Config Redirecionamento de erros -->
+  <error-page>
+    <exception-type>ifgoiano.edu.br.exceptions.DataBaseException</exception-type>
+    <location>/erro/dataBase.jsp</location>
+  </error-page>
+</web-app>
